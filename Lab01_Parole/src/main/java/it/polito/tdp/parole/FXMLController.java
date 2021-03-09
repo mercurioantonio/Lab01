@@ -58,7 +58,7 @@ public class FXMLController {
     
     @FXML
     void doCancel(ActionEvent event) {
-    	elenco.cancel(txtParola.getText());
+    	elenco.cancel(txtResult.getSelectedText());
     	txtParola.clear();
     	elenco.getElenco();
     	txtResult.setText(elenco.toString());
