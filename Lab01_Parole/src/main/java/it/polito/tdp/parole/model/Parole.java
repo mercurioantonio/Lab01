@@ -5,18 +5,18 @@ import java.util.*;
 
 public class Parole {
 	
-	//private List<String> parole;	
-	private List<String> Aparole;
+	private List<String> parole;	
+	//private List<String> Aparole;
 	
 	
 	public Parole() {
-		//this.parole = new LinkedList<String> ();
-		this.Aparole = new ArrayList<String> ();
+		this.parole = new LinkedList<String> ();
+		//this.Aparole = new ArrayList<String> ();
 	}
 	
 	public void addParola(String p) {
-		//parole.add(p);	
-		Aparole.add(p);
+		parole.add(p);	
+		//Aparole.add(p);
 	}
 	
 	public class ComparatoreDiStringhe implements  Comparator {
@@ -32,33 +32,34 @@ public class Parole {
 	}
 	
 	public List<String> getElenco() {
-		//Collections.sort(parole , new ComparatoreDiStringhe());
-		Collections.sort(Aparole , new ComparatoreDiStringhe());
-		//return parole;
-		return Aparole;
+		Collections.sort(parole , new ComparatoreDiStringhe());
+		//Collections.sort(Aparole , new ComparatoreDiStringhe());
+		return parole;
+		//return Aparole;
 	}
 	
 	public void reset() {
-		//parole.removeAll(parole);
-		Aparole.removeAll(Aparole);
+		parole.removeAll(parole);
+		//Aparole.removeAll(Aparole);
 	}
 
 	@Override
 	public String toString() {
 		String s = "";
-		/*for(String ss :  parole) {
+		for(String ss :  parole) {
+			s += ss + "\n";
+		}
+		
+		/*for(String ss :  Aparole) {
 			s += ss + "\n";
 		}*/
 		
-		for(String ss :  Aparole) {
-			s += ss + "\n";
-		}
 		return s;
 	}
 	
 	public void cancel(String s) {
-		//parole.remove(s);
-		Aparole.remove(s);
+		parole.remove(s);
+		//Aparole.remove(s);
 	}
 
 	

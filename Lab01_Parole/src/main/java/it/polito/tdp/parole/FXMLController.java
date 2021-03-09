@@ -12,68 +12,81 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class FXMLController {
-	
-	Parole elenco ;
 
-    @FXML
-    private ResourceBundle resources;
+	Parole elenco;
 
-    @FXML
-    private URL location;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private TextField txtParola;
+	@FXML
+	private URL location;
 
-    @FXML
-    private TextArea txtExecution;
-    
-    @FXML
-    private Button btnCancel;
-    
-    @FXML
-    private Button btnInserisci;
+	@FXML
+	private TextField txtParola;
 
-    @FXML
-    private TextArea txtResult;
+	@FXML
+	private TextArea txtExecution;
 
-    @FXML
-    private Button btnReset;
+	@FXML
+	private Button btnCancel;
 
-    @FXML
-    void doInsert(ActionEvent event) {
-    	elenco.addParola(txtParola.getText());
-    	txtParola.clear();
-    	elenco.getElenco();
-    	txtResult.setText(elenco.toString());
-    	txtExecution.setText(Long.toString(System.nanoTime()));
-    }
+	@FXML
+	private Button btnInserisci;
 
-    @FXML
-    void doReset(ActionEvent event) {
-    	elenco.reset();
-    	txtResult.clear();
-    	txtParola.clear();
-    	txtExecution.clear();
-    }
-    
-    @FXML
-    void doCancel(ActionEvent event) {
-    	elenco.cancel(txtResult.getSelectedText());
-    	txtParola.clear();
-    	elenco.getElenco();
-    	txtResult.setText(elenco.toString());
-    	txtExecution.setText(Long.toString(System.nanoTime()));
-    }
+	@FXML
+	private TextArea txtResult;
 
-    @FXML
-    void initialize() {
-        assert txtParola != null : "fx:id=\"txtParola\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert btnInserisci != null : "fx:id=\"btnInserisci\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert txtExecution != null : "fx:id=\"txtExecution\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert btnCancel != null : "fx:id=\"btnCancel\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert btnReset != null : "fx:id=\"btnReset\" was not injected: check your FXML file 'Scene.fxml'.";
+	@FXML
+	private Button btnReset;
 
-        elenco = new Parole() ;
-    }
+	@FXML
+	void doInsert(ActionEvent event) {
+
+		if (!txtParola.getText().equals("")) {
+			long in = System.nanoTime();
+			elenco.addParola(txtParola.getText());
+			long fin = System.nanoTime();
+			txtParola.clear();
+			elenco.getElenco();
+			txtResult.setText(elenco.toString());
+			long diff = fin - in;
+			txtExecution.setText(Long.toString( diff ));
+		} 
+		else {
+			txtResult.setText("Devi inserire una parola");
+		}
+
+	}
+
+	@FXML
+	void doReset(ActionEvent event) {
+		elenco.reset();
+		txtResult.clear();
+		txtParola.clear();
+		txtExecution.clear();
+	}
+
+	@FXML
+	void doCancel(ActionEvent event) {
+		long in = System.nanoTime();
+		elenco.cancel(txtResult.getSelectedText());
+		long fin = System.nanoTime();
+		txtParola.clear();
+		elenco.getElenco();
+		txtResult.setText(elenco.toString());
+		long diff = fin - in;
+		txtExecution.setText(Long.toString( diff ));
+	}
+
+	@FXML
+	void initialize() {
+		assert txtParola != null : "fx:id=\"txtParola\" was not injected: check your FXML file 'Scene.fxml'.";
+		assert btnInserisci != null : "fx:id=\"btnInserisci\" was not injected: check your FXML file 'Scene.fxml'.";
+		assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Scene.fxml'.";
+		assert txtExecution != null : "fx:id=\"txtExecution\" was not injected: check your FXML file 'Scene.fxml'.";
+		assert btnCancel != null : "fx:id=\"btnCancel\" was not injected: check your FXML file 'Scene.fxml'.";
+		assert btnReset != null : "fx:id=\"btnReset\" was not injected: check your FXML file 'Scene.fxml'.";
+
+		elenco = new Parole();
+	}
 }
